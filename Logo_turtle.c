@@ -14,7 +14,7 @@ int main() {
     box(w, 0, 0);
     wrefresh(w);
 
-    // Turtle in the center
+    // Turtle no centro
     int turtle_y = sh / 2;
     int turtle_x = sw / 2;
     mvwaddch(w, turtle_y, turtle_x, '@');
@@ -25,7 +25,7 @@ int main() {
     while (1) {
         int key = wgetch(w);
 
-        // Current position
+        // PosiÃ§Ã£o atual
         int new_turtle_y = turtle_y;
         int new_turtle_x = turtle_x;
 
@@ -33,7 +33,7 @@ int main() {
             pen_down = !pen_down;
         }
 
-        // Movement
+        // Movimentos
         if (key != -1) {
                 if (pen_down){
                     if (key == KEY_UP || key == 'w' || key == 'W') {
@@ -106,12 +106,12 @@ int main() {
                 continue;
             }
 
-            // Movimentação dentro da tela
+            // MovimentaÃ§Äƒo dentro da tela
             if (new_turtle_y < 0 || new_turtle_y >= sh || new_turtle_x < 0 || new_turtle_x >= sw) {
                 break;
             }
 
-            // Nova posição
+            // Nova posiÃ§Äƒo
             turtle_y = new_turtle_y;
             turtle_x = new_turtle_x;
             mvwaddch(w, turtle_y, turtle_x, '@');
