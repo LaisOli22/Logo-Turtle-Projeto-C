@@ -1,4 +1,5 @@
 #include <curses.h>
+#include <string.h>
 
 int main() {
     WINDOW* w, *prompt;
@@ -47,7 +48,7 @@ int main() {
                 continue;
             }
 
-            // Verifica se o comando é válido
+            // Verifica se o comando e valido
             if (strcmp(cmd, "up") != 0 && strcmp(cmd, "dw") != 0 && strcmp(cmd, "rt") != 0 &&
                 strcmp(cmd, "lt") != 0 && strcmp(cmd, "pu") != 0 && strcmp(cmd, "cl") != 0 &&
                 strcmp(cmd, "sq") != 0 && strcmp(cmd, "tg") != 0 && strcmp(cmd, "dm") != 0 &&
@@ -59,7 +60,7 @@ int main() {
             int new_turtle_y = turtle_y;
             int new_turtle_x = turtle_x;
 
-            // Apaga a posição atual
+            // Apaga a posiï¿½ï¿½o atual
             mvwaddch(w, turtle_y, turtle_x, pen_down ? '|' : ' ');
 
             if (strcmp(cmd, "up") == 0) {
@@ -205,13 +206,13 @@ int main() {
                 continue;
             }
 
-            // Movimentação dentro da tela
+            // Movimentaï¿½ï¿½o dentro da tela
             if (new_turtle_y < 0) new_turtle_y = 0;
             if (new_turtle_y >= sh - 3) new_turtle_y = sh - 4;
             if (new_turtle_x < 0) new_turtle_x = 0;
             if (new_turtle_x >= sw) new_turtle_x = sw - 1;
 
-            // Nova posição
+            // Nova posiï¿½ï¿½o
             turtle_y = new_turtle_y;
             turtle_x = new_turtle_x;
             mvwaddch(w, turtle_y, turtle_x, '@');
