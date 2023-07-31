@@ -60,14 +60,23 @@ int main() {
             int new_turtle_y = turtle_y;
             int new_turtle_x = turtle_x;
 
+            char traceback;
+            if (strcmp(cmd, "up") == 0  || strcmp(cmd, "dw") == 0) {
+                traceback = '|';
+            }
+
+            else if (strcmp(cmd, "lt") == 0 || strcmp(cmd, "rt") == 0) {
+                traceback = '-';
+            }
+
             // Apaga a posi��o atual
-            mvwaddch(w, turtle_y, turtle_x, pen_down ? '|' : ' ');
+            mvwaddch(w, turtle_y, turtle_x, pen_down ? traceback : ' ');
 
             if (strcmp(cmd, "up") == 0) {
                 for (int i = 0; i < value; i++) {
                     new_turtle_y -= 1;
                     if (pen_down) {
-                        mvwaddch(w, new_turtle_y, new_turtle_x, '|');
+                        mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
                     }
                 }
             }
@@ -75,7 +84,7 @@ int main() {
                 for (int i = 0; i < value; i++) {
                     new_turtle_y += 1;
                     if (pen_down) {
-                        mvwaddch(w, new_turtle_y, new_turtle_x, '|');
+                        mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
                     }
                 }
             }
@@ -83,7 +92,7 @@ int main() {
                 for (int i = 0; i < value; i++) {
                     new_turtle_x -= 1;
                     if (pen_down) {
-                        mvwaddch(w, new_turtle_y, new_turtle_x, '-');
+                        mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
                     }
                 }
             }
@@ -91,7 +100,7 @@ int main() {
                 for (int i = 0; i < value; i++) {
                     new_turtle_x += 1;
                     if (pen_down) {
-                        mvwaddch(w, new_turtle_y, new_turtle_x, '-');
+                        mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
                     }
                 }
             }

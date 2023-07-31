@@ -10,4 +10,3 @@ FLAGS = -I${INCLUDE}
 
 default:
 	$(CXX) ${FLAGS} ${SRC}  $(LIBSC) -o ${TARGET}.exe
-
