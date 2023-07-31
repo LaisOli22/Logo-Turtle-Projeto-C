@@ -1,6 +1,24 @@
 #include <curses.h>
 #include <string.h>
 
+int checkcmd(const char cmd[]){
+    char possibleCommands[][11] = {
+        "up", "dw", "lt", "rt"
+        "pu", "cl", "sq", "tg"
+        "dm", "ci", "ex"
+    };
+
+    for(int i = 0 ; i <= 10 ; i++) {
+        if (strcmp(possibleCommands[i], cmd) == 0){
+            return 0;
+            break;
+        }
+    }
+
+    return 1;
+
+}
+
 int main() {
     WINDOW* w, *prompt;
 
@@ -49,10 +67,7 @@ int main() {
             }
 
             // Verifica se o comando e valido
-            if (strcmp(cmd, "up") != 0 && strcmp(cmd, "dw") != 0 && strcmp(cmd, "rt") != 0 &&
-                strcmp(cmd, "lt") != 0 && strcmp(cmd, "pu") != 0 && strcmp(cmd, "cl") != 0 &&
-                strcmp(cmd, "sq") != 0 && strcmp(cmd, "tg") != 0 && strcmp(cmd, "dm") != 0 &&
-                strcmp(cmd, "ci") != 0 && strcmp(cmd, "ex") != 0) {
+            if (checkcmd(cmd)) {
                 continue;
             }
 
