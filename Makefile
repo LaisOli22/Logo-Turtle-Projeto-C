@@ -1,8 +1,8 @@
-TARGET = Turtle.imput
+TARGET = Turtle_imput
 LIBSC = lib\pdcurses.a
 INCLUDE = include
 
-SRC = Turtle.imput.c
+SRC = Turtle_imput.c
 
 # Opcoes de compiladores
 CXX = gcc
