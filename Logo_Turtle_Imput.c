@@ -2,22 +2,16 @@
 #include <string.h>
 #include "Logo_Turtle.h"
 
-int checkcmd(const char cmd[]){
-    char possibleCommands[][11] = {
-        "up", "dw", "lt", "rt"
-        "pu", "cl", "sq", "tg"
-        "dm", "ci", "ex"
-    };
+int checkinput(const char* sArray[] , const char cmd[]){
 
-    for(int i = 0 ; i <= 10 ; i++) {
-        if (strcmp(possibleCommands[i], cmd) == 0){
-            return 0;
-            break;
+    int i = 0;
+    while (sArray[i] != NULL) {
+        if (strcmp(sArray[i], cmd) == 0) {
+            return 1;
         }
+        i++;
     }
-
-    return 1;
-
+    return 0;
 }
 
 void definetrace(char *traceback , const char cmd[]){
@@ -38,7 +32,7 @@ void moveturtle(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int p
             if (pen_down) {
                 mvwaddch(w, *new_turtle_y, *new_turtle_x, traceback);
             }
-        }
+        }  
     }
     else if (strcmp(cmd, "dw") == 0) {
         //down
@@ -117,7 +111,15 @@ int main() {
             }
 
             // Verifica se o comando e valido
-            if (checkcmd(cmd)) {
+
+            const char *possibleCommands[] = {
+                "up", "dw", "lt", "rt" , 
+                "pu", "cl", "sq", "tg"
+                "dm", "ci", "ex", NULL
+            };
+            
+
+            if (!checkinput(possibleCommands , cmd)) {
                 continue;
             }
 
@@ -131,9 +133,14 @@ int main() {
             // Apaga a posi��o atual
             mvwaddch(w, turtle_y, turtle_x, pen_down ? traceback : ' ');
 
-            moveturtle(cmd , &new_turtle_y , &new_turtle_x , pen_down , value, traceback , w);
+            const char * cmdmoveturtle[] = {
+                "up", "dw", "lt", "rt" , NULL
+            };
 
-            if (strcmp(cmd, "sq") == 0) {//Quadrado
+            if (checkinput(cmdmoveturtle, cmd)){
+                moveturtle(cmd , &new_turtle_y , &new_turtle_x , pen_down , value, traceback , w);
+            }
+            else if (strcmp(cmd, "sq") == 0) {//Quadrado
                 for (int i = 0; i < 12; i++) {
                     new_turtle_x += 1;
                     mvwaddch(w, new_turtle_y, new_turtle_x, '-');

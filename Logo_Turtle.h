@@ -1,7 +1,8 @@
 #ifndef LOGO_TURTLE_H
 #define LOGO_TURTLE_H
+#include <curses.h>
 
-int checkcmd(const char cmd[]);
+int checkinput(const char* sArray[] , const char cmd[]);
 void definetrace(char *traceback , const char cmd[]);
 void moveturtle(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int pen_down , int value , char traceback , WINDOW* w);
 
