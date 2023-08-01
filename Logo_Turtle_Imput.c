@@ -31,12 +31,12 @@ void definetrace(char *traceback , const char cmd[]){
 }
 
 
-void move(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int pen_down , int value , char traceback , WINDOW* w){
+void moveturtle(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int pen_down , int value , char traceback , WINDOW* w){
     if (strcmp(cmd, "up") == 0) {
         for (int i = 0; i < value; i++) {
             *new_turtle_y -= 1;
             if (pen_down) {
-                mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
+                mvwaddch(w, *new_turtle_y, *new_turtle_x, traceback);
             }
         }
     }
@@ -45,7 +45,7 @@ void move(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int pen_dow
         for (int i = 0; i < value; i++) {
             *new_turtle_y += 1;
             if (pen_down) {
-                mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
+                mvwaddch(w, *new_turtle_y, *new_turtle_x, traceback);
             }
         }
     }
@@ -53,7 +53,7 @@ void move(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int pen_dow
         for (int i = 0; i < value; i++) {
             *new_turtle_x -= 1;
             if (pen_down) {
-                mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
+                mvwaddch(w, *new_turtle_y, *new_turtle_x, traceback);
             }
         }
     }
@@ -61,7 +61,7 @@ void move(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int pen_dow
         for (int i = 0; i < value; i++) {
             *new_turtle_x += 1;
             if (pen_down) {
-                mvwaddch(w, new_turtle_y, new_turtle_x, traceback);
+                mvwaddch(w, *new_turtle_y, *new_turtle_x, traceback);
             }
         }
     }
@@ -131,7 +131,7 @@ int main() {
             // Apaga a posi��o atual
             mvwaddch(w, turtle_y, turtle_x, pen_down ? traceback : ' ');
 
-            move(cmd , &new_turtle_y , &new_turtle_x , pen_down , value, traceback , w);
+            moveturtle(cmd , &new_turtle_y , &new_turtle_x , pen_down , value, traceback , w);
 
             if (strcmp(cmd, "sq") == 0) {//Quadrado
                 for (int i = 0; i < 12; i++) {
