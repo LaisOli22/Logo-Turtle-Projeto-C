@@ -63,6 +63,103 @@ void moveturtle(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int p
 
 }
 
+void drawfigure(const char cmd[] , int *new_turtle_y , int *new_turtle_x , int pen_down , int value , WINDOW* w){
+    if (strcmp(cmd, "sq") == 0) {//Quadrado
+        for (int i = 0; i < 12; i++) {
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '-');
+        }
+        for (int i = 0; i < 6; i++) {
+            *new_turtle_y += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '|');
+        }
+        for (int i = 0; i < 12; i++) {
+            *new_turtle_x -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '-');
+        }
+        for (int i = 0; i < 6; i++) {
+            *new_turtle_y -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '|');
+        }
+    }
+    else if (strcmp(cmd, "tg") == 0) {//Triangulo
+        for (int i = 0; i < 6; i++) {
+            *new_turtle_y -= 1;
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '/');
+        }
+        for (int i = 0; i < 7; i++) {
+            *new_turtle_y += 1;
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '\\');
+        }
+        for (int i = 0; i < 14; i++) {
+            *new_turtle_x -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '-');
+        }
+    }
+    else if (strcmp(cmd, "dm") == 0) {
+        for (int i = 0; i < 6; i++) {
+            *new_turtle_y -= 1;
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '/');
+        }
+        for (int i = 0; i < 6; i++) {
+            *new_turtle_y += 1;
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '\\');
+        }
+        for (int i = 0; i < 6; i++) {
+            *new_turtle_y += 1;
+            *new_turtle_x -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '/');
+        }
+        for (int i = 0; i < 6; i++) {
+            *new_turtle_y -= 1;
+            *new_turtle_x -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '\\');
+        }
+    }
+    else if (strcmp(cmd, "ci") == 0) {
+        for (int i = 0; i < 7; i++) {
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '-');
+        }
+        for (int i = 0; i < 2; i++) {
+            *new_turtle_y += 1;
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '\\');
+        }
+        for (int i = 0; i < 2; i++) {
+            *new_turtle_y += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '|');
+        }
+        for (int i = 0; i < 2; i++) {
+            *new_turtle_y += 1;
+            *new_turtle_x -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '/');
+        }
+        for (int i = 0; i < 7; i++) {
+            *new_turtle_x -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '-');
+        }
+        for (int i = 0; i < 2; i++) {
+            *new_turtle_y -= 1;
+            *new_turtle_x -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '\\');
+        }
+        for (int i = 0; i < 2; i++) {
+            *new_turtle_y -= 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '|');
+        }
+        for (int i = 0; i < 2; i++) {
+            *new_turtle_y -= 1;
+            *new_turtle_x += 1;
+            mvwaddch(w, *new_turtle_y, *new_turtle_x, '/');
+        }
+    }
+}
+
 int main() {
     WINDOW* w, *prompt;
 
@@ -106,20 +203,21 @@ int main() {
         else {
             char cmd[10];
             int value;
-            if (sscanf(command, "%s %d", cmd, &value) != 2) {
-                continue;
-            }
-
-            // Verifica se o comando e valido
-
+   
             const char *possibleCommands[] = {
                 "up", "dw", "lt", "rt" , 
-                "pu", "cl", "sq", "tg"
+                "pu", "cl", "sq", "tg" ,
                 "dm", "ci", "ex", NULL
             };
-            
 
-            if (!checkinput(possibleCommands , cmd)) {
+            const char *zNuComands[] = {
+                "up", "dw", "lt", "rt" , 
+                "pu", "cl", "sq", "tg" ,
+                "dm", "ci", "ex", NULL
+            };
+
+            int checks = sscanf(command, "%s %d", cmd, &value);
+            if ((checks != 2 || !checkinput(possibleCommands,cmd)) & !(checks >= 1 & checkinput(zNuComands, cmd))) {
                 continue;
             }
 
@@ -136,104 +234,19 @@ int main() {
             const char * cmdmoveturtle[] = {
                 "up", "dw", "lt", "rt" , NULL
             };
+            
+            const char * cmddrawfigure[] = {
+                "sq" , "tg" , "dm" , "ci" , NULL
+            };
 
             if (checkinput(cmdmoveturtle, cmd)){
                 moveturtle(cmd , &new_turtle_y , &new_turtle_x , pen_down , value, traceback , w);
             }
-            else if (strcmp(cmd, "sq") == 0) {//Quadrado
-                for (int i = 0; i < 12; i++) {
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '-');
-                }
-                for (int i = 0; i < 6; i++) {
-                    new_turtle_y += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '|');
-                }
-                for (int i = 0; i < 12; i++) {
-                    new_turtle_x -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '-');
-                }
-                for (int i = 0; i < 6; i++) {
-                    new_turtle_y -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '|');
-                }
+
+            else if (checkinput(cmddrawfigure,cmd)){
+                drawfigure(cmd , &new_turtle_y , &new_turtle_x , pen_down , value, w);
             }
-            else if (strcmp(cmd, "tg") == 0) {//Triangulo
-                for (int i = 0; i < 6; i++) {
-                    new_turtle_y -= 1;
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '/');
-                }
-                for (int i = 0; i < 7; i++) {
-                    new_turtle_y += 1;
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '\\');
-                }
-                for (int i = 0; i < 14; i++) {
-                    new_turtle_x -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '-');
-                }
-            }
-            else if (strcmp(cmd, "dm") == 0) {
-                for (int i = 0; i < 6; i++) {
-                    new_turtle_y -= 1;
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '/');
-                }
-                for (int i = 0; i < 6; i++) {
-                    new_turtle_y += 1;
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '\\');
-                }
-                for (int i = 0; i < 6; i++) {
-                    new_turtle_y += 1;
-                    new_turtle_x -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '/');
-                }
-                for (int i = 0; i < 6; i++) {
-                    new_turtle_y -= 1;
-                    new_turtle_x -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '\\');
-                }
-            }
-            else if (strcmp(cmd, "ci") == 0) {
-                for (int i = 0; i < 7; i++) {
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '-');
-                }
-                for (int i = 0; i < 2; i++) {
-                    new_turtle_y += 1;
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '\\');
-                }
-                for (int i = 0; i < 2; i++) {
-                    new_turtle_y += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '|');
-                }
-                for (int i = 0; i < 2; i++) {
-                    new_turtle_y += 1;
-                    new_turtle_x -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '/');
-                }
-                for (int i = 0; i < 7; i++) {
-                    new_turtle_x -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '-');
-                }
-                for (int i = 0; i < 2; i++) {
-                    new_turtle_y -= 1;
-                    new_turtle_x -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '\\');
-                }
-                for (int i = 0; i < 2; i++) {
-                    new_turtle_y -= 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '|');
-                }
-                for (int i = 0; i < 2; i++) {
-                    new_turtle_y -= 1;
-                    new_turtle_x += 1;
-                    mvwaddch(w, new_turtle_y, new_turtle_x, '/');
-                }
-            }
+            
             else if (strcmp(cmd, "cl") == 0) {
                 wclear(w);
                 box(w, 0, 0);
