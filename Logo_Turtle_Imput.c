@@ -21,7 +21,15 @@ void definetrace(char *traceback , const char cmd[]){
 
         else if (strcmp(cmd, "lt") == 0 || strcmp(cmd, "rt") == 0) {
             *traceback = '-';
-        }    
+        }
+        
+        else if (strcmp(cmd, "tg") == 0 || strcmp(cmd, "rt") == 0) {
+            *traceback = '/';
+        }
+
+        else{
+            *traceback = ' ';
+        }
 }
 
 
@@ -229,7 +237,10 @@ int main() {
             definetrace(&traceback, cmd);
 
             // Apaga a posi��o atual
-            mvwaddch(w, turtle_y, turtle_x, pen_down ? traceback : ' ');
+            if (!(strcmp(cmd, "pu") == 0)) {
+                mvwaddch(w, turtle_y, turtle_x, pen_down ? traceback : ' ');
+            }
+    
 
             const char * cmdmoveturtle[] = {
                 "up", "dw", "lt", "rt" , NULL
