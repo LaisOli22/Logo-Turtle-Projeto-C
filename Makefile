@@ -1,4 +1,4 @@
-TARGET = Menu
+TARGET = Program
 LIBSC = src/lib/pdcurses.a
 INCLUDE = src/include
 
