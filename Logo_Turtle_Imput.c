@@ -22,7 +22,6 @@ const char * cmddrawfigure[] = {
     "sq" , "tg" , "dm" , "ci" , NULL
 };
 
-
 int main() {
     WINDOW* w, *prompt;
     
@@ -93,7 +92,4 @@ int main() {
 
     // Limpar e sair
     delwin(prompt);
-
 }
-
-
