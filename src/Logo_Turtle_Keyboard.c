@@ -1,6 +1,7 @@
 #include <curses.h>
+#include "turtle_functions.h"
 
-int main() {
+int logoturtlekeyboard() {
     WINDOW* w;
     initscr();
     noecho();

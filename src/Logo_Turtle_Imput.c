@@ -1,28 +1,29 @@
 #include <curses.h>
 #include <string.h>
-#include "src/turtle_functions.h"
+#include "turtle_functions.h"
 
-//Comandos cmd
-const char *possibleCommands[] = {
-    "up", "dw", "lt", "rt" , 
-    "pc", "cl", "sq", "tg" ,
-    "dm", "ci", "ex", NULL
-};
+int logoturtleimput() {
 
-const char *zNuComands[] = { 
-    "pc", "cl", "sq", "tg" ,
-    "dm", "ci", "ex", NULL
-};
+    //Comandos cmd
+    const char *possibleCommands[] = {
+        "up", "dw", "lt", "rt" , 
+        "pc", "cl", "sq", "tg" ,
+        "dm", "ci", "ex", NULL
+    };
 
-const char * cmdmoveturtle[] = {
-    "up", "dw", "lt", "rt" , NULL
-};
+    const char *zNuComands[] = { 
+        "pc", "cl", "sq", "tg" ,
+        "dm", "ci", "ex", NULL
+    };
 
-const char * cmddrawfigure[] = {
-    "sq" , "tg" , "dm" , "ci" , NULL
-};
+    const char * cmdmoveturtle[] = {
+        "up", "dw", "lt", "rt" , NULL
+    };
 
-int main() {
+    const char * cmddrawfigure[] = {
+        "sq" , "tg" , "dm" , "ci" , NULL
+    };
+
     WINDOW* w, *prompt;
     
     int turtle_y ; int turtle_x ;
@@ -92,4 +93,5 @@ int main() {
 
     // Limpar e sair
     delwin(prompt);
+    return 0;
 }

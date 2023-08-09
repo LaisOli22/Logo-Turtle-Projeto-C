@@ -1,5 +1,6 @@
 #include <curses.h>
 #include <string.h>
+#include "src\Logo_Turtle.h"
 
 char* menu[] = {"Comandos", "Modo teclado", "Modo texto", "Sair"};
 int menu_size = sizeof(menu) / sizeof(menu[0]);
@@ -53,12 +54,12 @@ int main() {
                 current_row_idx += 1;
             }
         } else if (key == KEY_ENTER || key == '\n' || key == '\r') {
-            // Sa�da
+            // Saída
             if (current_row_idx == menu_size - 1) {
                 werase(msg_win);
                 box(msg_win, 0, 0);
-                mvwprintw(msg_win, 1, 2, "Voc� selecionou: %s", menu[current_row_idx]);
-                mvwprintw(msg_win, 3, 2, "At� logo!");
+                mvwprintw(msg_win, 1, 2, "Você selecionou: %s", menu[current_row_idx]);
+                mvwprintw(msg_win, 3, 2, "Até logo!");
                 wrefresh(msg_win);
                 getch();
                 break;
@@ -66,31 +67,40 @@ int main() {
                 // Modo texto
                 werase(msg_win);
                 box(msg_win, 0, 0);
-                mvwprintw(msg_win, 1, 2, "Voc� selecionou: %s", menu[current_row_idx]);
+                mvwprintw(msg_win, 1, 2, "Você selecionou: %s", menu[current_row_idx]);
                 mvwprintw(msg_win, 3, 2, "Iniciando o jogo...");
                 mvwprintw(msg_win, 5, 2, "Pressione Enter");
                 wrefresh(msg_win);
-                getch();
+                int ch = wgetch(msg_win); // Lê o caractere pressionado
+
+                if (ch == '\n' || ch == '\r') {
+                    logoturtleimput();
+                }
+
             } else if (current_row_idx == menu_size - 3) {
                 // Modo teclado
                 werase(msg_win);
                 box(msg_win, 0, 0);
-                mvwprintw(msg_win, 1, 2, "Voc� selecionou: %s", menu[current_row_idx]);
+                mvwprintw(msg_win, 1, 2, "Você selecionou: %s", menu[current_row_idx]);
                 mvwprintw(msg_win, 3, 2, "Iniciando o jogo...");
                 mvwprintw(msg_win, 5, 2, "Pressione Enter");
                 wrefresh(msg_win);
-                getch();
+                int ch = wgetch(msg_win); // Lê o caractere pressionado
+
+                if (ch == '\n' || ch == '\r') {
+                    logoturtlekeyboard();
+                }
             } else if (current_row_idx == menu_size - 4) {
                 // Comandos
                 werase(msg_win);
                 box(msg_win, 0, 0);
-                mvwprintw(msg_win, 1, 2, "Voc� selecionou: %s", menu[current_row_idx]);
+                mvwprintw(msg_win, 1, 2, "Você selecionou: %s", menu[current_row_idx]);
                 mvwprintw(msg_win, 2, 2, "MODO TECLADO:");
                 mvwprintw(msg_win, 4, 2, "Tecla W = Cima");
                 mvwprintw(msg_win, 5, 2, "Tecla A = Esquerda");
                 mvwprintw(msg_win, 6, 2, "Tecla S = Baixo");
                 mvwprintw(msg_win, 7, 2, "Tecla D = Direita");
-                mvwprintw(msg_win, 8, 2, "Barra de espa�o = Para de desenhar");
+                mvwprintw(msg_win, 8, 2, "Barra de espaço = Para de desenhar");
                 mvwprintw(msg_win, 10, 2, "Diagonais:");
                 mvwprintw(msg_win, 11, 2, "Tecla E = Cima-direita");
                 mvwprintw(msg_win, 12, 2, "Tecla Q = Cima-esquerda");
@@ -105,9 +115,9 @@ int main() {
                 mvwprintw(msg_win, 22, 2, "lt = Esquerda");
                 mvwprintw(msg_win, 24, 2, "Desenhos:");
                 mvwprintw(msg_win, 25, 2, "sq = Quadrado");
-                mvwprintw(msg_win, 26, 2, "tg = Tri�ngulo");
+                mvwprintw(msg_win, 26, 2, "tg = Triângulo");
                 mvwprintw(msg_win, 27, 2, "dm = Diamante");
-                mvwprintw(msg_win, 28, 2, "ci = C�rculo");
+                mvwprintw(msg_win, 28, 2, "ci = Círculo");
                 mvwprintw(msg_win, 30, 2, "Ferramentas:");
                 mvwprintw(msg_win, 31, 2, "pu = Para de desenhar / Volta a desenhar");
                 mvwprintw(msg_win, 32, 2, "cl = Limpa os desenhos");
