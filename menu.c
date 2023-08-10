@@ -42,6 +42,7 @@ int main() {
     WINDOW* msg_win = newwin(msg_height, msg_width, msg_y, msg_x);
 
     while (1) {
+        
         print_menu(stdscr, current_row_idx);
         int key = getch();
 
@@ -61,7 +62,7 @@ int main() {
                 mvwprintw(msg_win, 1, 2, "Você selecionou: %s", menu[current_row_idx]);
                 mvwprintw(msg_win, 3, 2, "Até logo!");
                 wrefresh(msg_win);
-                getch();
+                wgetch(msg_win);
                 break;
             } else if (current_row_idx == menu_size - 2) {
                 // Modo texto
@@ -124,9 +125,12 @@ int main() {
                 mvwprintw(msg_win, 20, 2, "ex = Sair");
 
                 wrefresh(msg_win);
-                getch();
+                wgetch(msg_win); // Lê o caractere pressionado
+
+            
             }
         }
+        
     }
     // Limpar e sair
     delwin(msg_win);

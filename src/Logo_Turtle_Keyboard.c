@@ -119,10 +119,9 @@ int logoturtlekeyboard() {
 
             wrefresh(w);
 
-            napms(100);
         }
     }
-
+    delwin(w);
     endwin();
     return 0;
 }
