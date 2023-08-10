@@ -101,27 +101,28 @@ int main() {
                 mvwprintw(msg_win, 6, 2, "Tecla S = Baixo");
                 mvwprintw(msg_win, 7, 2, "Tecla D = Direita");
                 mvwprintw(msg_win, 8, 2, "Barra de espaço = Para de desenhar");
-                mvwprintw(msg_win, 10, 2, "Diagonais:");
-                mvwprintw(msg_win, 11, 2, "Tecla E = Cima-direita");
-                mvwprintw(msg_win, 12, 2, "Tecla Q = Cima-esquerda");
-                mvwprintw(msg_win, 13, 2, "Tecla C = Baixo-direita");
-                mvwprintw(msg_win, 14, 2, "Tecla Z = Baixo-esquerda");
+                mvwprintw(msg_win, 3, 50, "Diagonais:");
+                mvwprintw(msg_win, 4, 50, "Tecla E = Cima-direita");
+                mvwprintw(msg_win, 5, 50, "Tecla Q = Cima-esquerda");
+                mvwprintw(msg_win, 6, 50, "Tecla C = Baixo-direita");
+                mvwprintw(msg_win, 7, 50, "Tecla Z = Baixo-esquerda");
+                
+                mvwprintw(msg_win, 10, 2, "MODO TEXTO:");
+                mvwprintw(msg_win, 11, 2, "ex. 'up 3' (qualquer comando + valor)");
+                mvwprintw(msg_win, 12, 2, "up = Cima");
+                mvwprintw(msg_win, 13, 2, "dw = Baixo");
+                mvwprintw(msg_win, 14, 2, "rt = Direita");
+                mvwprintw(msg_win, 15, 2, "lt = Esquerda");
+                mvwprintw(msg_win, 11, 50, "Desenhos:");
+                mvwprintw(msg_win, 12, 50, "sq = Quadrado");
+                mvwprintw(msg_win, 13, 50, "tg = Triângulo");
+                mvwprintw(msg_win, 14, 50, "dm = Diamante");
+                mvwprintw(msg_win, 15, 50, "ci = Círculo");
+                mvwprintw(msg_win, 17, 2, "Ferramentas:");
+                mvwprintw(msg_win, 18, 2, "pc = Para de desenhar / Volta a desenhar");
+                mvwprintw(msg_win, 19, 2, "cl = Limpa os desenhos");
+                mvwprintw(msg_win, 20, 2, "ex = Sair");
 
-                mvwprintw(msg_win, 16, 2, "MODO TEXTO:");
-                mvwprintw(msg_win, 17, 2, "ex. 'up 3' (qualquer comando + valor)");
-                mvwprintw(msg_win, 19, 2, "up = Cima");
-                mvwprintw(msg_win, 20, 2, "dw = Baixo");
-                mvwprintw(msg_win, 21, 2, "rt = Direita");
-                mvwprintw(msg_win, 22, 2, "lt = Esquerda");
-                mvwprintw(msg_win, 24, 2, "Desenhos:");
-                mvwprintw(msg_win, 25, 2, "sq = Quadrado");
-                mvwprintw(msg_win, 26, 2, "tg = Triângulo");
-                mvwprintw(msg_win, 27, 2, "dm = Diamante");
-                mvwprintw(msg_win, 28, 2, "ci = Círculo");
-                mvwprintw(msg_win, 30, 2, "Ferramentas:");
-                mvwprintw(msg_win, 31, 2, "pu = Para de desenhar / Volta a desenhar");
-                mvwprintw(msg_win, 32, 2, "cl = Limpa os desenhos");
-                mvwprintw(msg_win, 33, 2, "ex = Sair");
                 wrefresh(msg_win);
                 getch();
             }
